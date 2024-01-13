@@ -1,5 +1,5 @@
 <template>
-  <div class="about-page-container">About Page</div>
+  <div class="about-page-container"></div>
 </template>
 
 <script setup lang="ts"></script>
@@ -8,6 +8,6 @@
 .about-page-container {
   height: 100vh;
   width: 100%;
-  background: red;
+  background: #1a1a1a;
 }
 </style>

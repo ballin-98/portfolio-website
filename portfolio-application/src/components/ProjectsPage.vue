@@ -1,5 +1,5 @@
 <template>
-  <div class="projects-page-container">Projects Page</div>
+  <div class="projects-page-container"></div>
 </template>
 
 <script setup lang="ts"></script>
