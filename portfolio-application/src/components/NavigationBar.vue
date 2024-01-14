@@ -1,8 +1,12 @@
 <template>
   <div class="nav-bar-container">
     <div class="left-container">
-      <div class="left-container-link">About</div>
-      <div class="left-container-link">Projects</div>
+      <a @click="doSomething">
+        <div class="left-container-link">About</div>
+      </a>
+      <a href="#project-page">
+        <div class="left-container-link">Projects</div>
+      </a>
     </div>
     <div class="center-container">
       <div class="logo">Alex Bali</div>
@@ -27,7 +31,14 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const doSomething = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+};
+</script>
 <style scoped>
 .nav-bar-container {
   background-color: #ff2e63;
@@ -44,11 +55,15 @@
   width: 300px;
   align-items: center;
 }
+.left-container a {
+  text-decoration: none;
+}
 
 .left-container-link {
   font-size: 24px;
   color: white;
   padding: 10px;
+  margin: 0px 5px;
 }
 
 .left-container-link:hover {
@@ -84,6 +99,7 @@
   display: flex;
   align-items: center; /* Center vertically */
   padding: 10px;
+  margin: 0px 5px;
 }
 
 .image-container img {
@@ -95,5 +111,73 @@
 
 .image-container:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.4); /* Add a subtle box-shadow effect */
+}
+
+/* Styles for small screens */
+@media only screen and (max-width: 800px) {
+  .center-container {
+    display: none;
+  }
+  .left-container {
+    display: flex;
+    flex-direction: row;
+    width: 200px;
+    align-items: center;
+  }
+
+  .left-container-link {
+    font-size: 20px;
+    color: white;
+  }
+
+  .left-container-link:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4); /* Add a subtle box-shadow effect */
+    cursor: pointer;
+  }
+  .right-container {
+    display: flex;
+    flex-direction: row;
+    width: 200px;
+    align-items: center; /* Center vertically */
+    justify-content: flex-end;
+  }
+
+  .image-container {
+    height: 50%;
+    display: flex;
+    align-items: center; /* Center vertically */
+  }
+  @media only screen and (max-width: 400px) {
+    .center-container {
+      display: none;
+    }
+    .left-container {
+      display: flex;
+      flex-direction: row;
+      width: 100px;
+      align-items: center;
+    }
+
+    .left-container-link {
+      font-size: 14px;
+      color: white;
+    }
+    .right-container {
+      display: flex;
+      flex-direction: row;
+      width: 100px;
+      align-items: center; /* Center vertically */
+      justify-content: flex-end;
+    }
+
+    .image-container {
+      height: 50%;
+      display: flex;
+      align-items: center; /* Center vertically */
+    }
+    .image-container img {
+      height: 24px;
+    }
+  }
 }
 </style>
