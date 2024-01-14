@@ -31,7 +31,6 @@
 <style scoped>
 .nav-bar-container {
   background-color: #ff2e63;
-  /* border: 2px solid #00bfff; */
   height: inherit;
   display: flex;
   flex-direction: row;
@@ -42,11 +41,8 @@
 .left-container {
   display: flex;
   flex-direction: row;
-  border: 1px solid black;
   width: 300px;
   align-items: center;
-  /* padding: 0px 20px; */
-  /* gap: 10px; */
 }
 
 .left-container-link {
@@ -55,11 +51,15 @@
   padding: 10px;
 }
 
+.left-container-link:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4); /* Add a subtle box-shadow effect */
+  cursor: pointer;
+}
+
 .center-container {
   display: flex;
   flex-direction: row;
-  border: 1px solid green;
-  flex: 2;
+  flex: 1;
   color: white;
   margin: auto;
   border: 1px solid white;
@@ -77,9 +77,6 @@
   width: 300px;
   align-items: center; /* Center vertically */
   justify-content: flex-end;
-  /* gap: 10px; */
-  /* padding-right: 20px; */
-  border: 1px solid black;
 }
 
 .image-container {
@@ -95,8 +92,6 @@
 .image-container a {
   font-style: none;
 }
-
-/* Cool overlay effect */
 
 .image-container:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.4); /* Add a subtle box-shadow effect */
