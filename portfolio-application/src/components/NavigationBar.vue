@@ -61,7 +61,7 @@ const doSomething = () => {
 
 .left-container-link {
   font-size: 24px;
-  color: white;
+  color: rgb(0, 0, 0);
   padding: 10px;
   margin: 0px 5px;
 }
@@ -75,9 +75,9 @@ const doSomething = () => {
   display: flex;
   flex-direction: row;
   flex: 1;
-  color: white;
+  color: rgb(0, 0, 0);
   margin: auto;
-  border: 1px solid white;
+  border: 1px solid rgb(0, 0, 0);
 }
 
 .logo {
