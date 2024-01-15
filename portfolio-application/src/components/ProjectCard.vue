@@ -30,10 +30,16 @@ const props = defineProps({
 
 <style scoped>
 .card-container {
-  height: 50%;
-  width: 300px;
+  height: 90%;
+  width: 90%;
   position: relative;
   border-radius: 10%;
+  overflow: hidden; /* Ensure the overlay doesn't spill out */
+  transition: transform 0.1s;
+}
+
+.card-container:hover {
+  transform: scale(1.1); /* Scale up by 10% on hover */
 }
 
 .card-image-container {
@@ -65,6 +71,7 @@ const props = defineProps({
 }
 .card-overlay:hover {
   opacity: 1;
+  background-color: rgb(129, 124, 124, 0.8);
 }
 .card-title,
 .card-description {
