@@ -5,7 +5,7 @@
       :class="{ hidden: disableLeft }"
       @click="getPreviousCards"
     >
-      &lt;
+      <img src="/assets/chevron_left.svg" alt="" />
     </div>
     <transition name="fade" mode="out-in"></transition>
     <div
@@ -25,7 +25,7 @@
       :class="{ hidden: disableRight }"
       @click="getNextCards"
     >
-      >
+      <img src="/assets/chevron_right.svg" alt="" />
     </div>
   </div>
 </template>
