@@ -5,7 +5,7 @@
       :class="{ hidden: disableLeft }"
       @click="getPreviousCards"
     >
-      &lt;
+      <img src="/assets/chevron_left.svg" alt="" />
     </div>
     <transition name="fade" mode="out-in"></transition>
     <div
@@ -25,7 +25,7 @@
       :class="{ hidden: disableRight }"
       @click="getNextCards"
     >
-      >
+      <img src="/assets/chevron_right.svg" alt="" />
     </div>
   </div>
 </template>
@@ -80,8 +80,26 @@ const getPreviousCards = () => {
 .arrow-button {
   width: 100px;
   font-size: 24px;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+  padding: 0px 5px;
+}
+
+.arrow-button img {
+  height: 40px;
+}
+
+.arrow-button img {
+  height: 40px;
+  transition: box-shadow 0.1s ease;
+}
+
+.arrow-button img:hover {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
 .projects-container {
@@ -91,7 +109,7 @@ const getPreviousCards = () => {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  border: 2px solid white;
+  /* border: 2px solid white; */
 }
 .fade-enter-active,
 .fade-leave-active {
