@@ -31,11 +31,12 @@ const props = defineProps({
 <style scoped>
 .card-container {
   height: 90%;
-  width: 90%;
+  width: 80%;
   position: relative;
   border-radius: 10%;
   overflow: hidden; /* Ensure the overlay doesn't spill out */
   transition: transform 0.1s;
+  /* padding: 0px 30px; */
 }
 
 .card-container:hover {

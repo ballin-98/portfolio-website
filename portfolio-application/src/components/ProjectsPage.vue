@@ -1,31 +1,32 @@
 <template>
   <div class="projects-page-container" id="project-page">
-    <div
-      class="arrow-button"
-      :class="{ hidden: disableLeft }"
-      @click="getPreviousCards"
-    >
-      <img src="/assets/chevron_left.svg" alt="" />
+    <div class="project-tag-container">
+      <Tag v-for="tag in tagList" :key="tag.title" :title="tag.title"></Tag>
     </div>
-    <transition name="fade" mode="out-in"></transition>
-    <div
-      class="projects-container"
-      v-for="project in visibleCards"
-      :key="project.title"
-    >
+    <div class="projects-container">
+      <div
+        class="arrow-button"
+        :class="{ hidden: disableLeft }"
+        @click="getPreviousCards"
+      >
+        <img src="/assets/chevron_left.svg" alt="" />
+      </div>
+      <transition name="fade" mode="out-in"></transition>
       <ProjectCard
+        v-for="project in visibleCards"
+        :key="project.title"
         :title="project.title"
         :description="project.description"
         :image="project.image"
       ></ProjectCard>
-    </div>
-    <transition />
-    <div
-      class="arrow-button"
-      :class="{ hidden: disableRight }"
-      @click="getNextCards"
-    >
-      <img src="/assets/chevron_right.svg" alt="" />
+      <transition />
+      <div
+        class="arrow-button"
+        :class="{ hidden: disableRight }"
+        @click="getNextCards"
+      >
+        <img src="/assets/chevron_right.svg" alt="" />
+      </div>
     </div>
   </div>
 </template>
@@ -36,6 +37,26 @@ import ProjectCard from "@/components/ProjectCard.vue";
 import { projectList } from "@/projectData";
 import { Ref, computed, ref } from "vue";
 import type { projectCardData } from "@/projectData";
+import Tag from "@/components/Tag.vue";
+
+type Tagg = {
+  title: string;
+};
+
+const tagList: Tagg[] = [
+  { title: "React" },
+  { title: "Vue" },
+  { title: "C#" },
+  { title: "DOTNET CORE" },
+  { title: "Web Development" },
+  { title: "Backend Development" },
+  { title: "Design" },
+  { title: "API Development" },
+  { title: "Mobile Development" },
+  { title: "JavaSript" },
+  { title: "TypeScript" },
+  { title: "HTML" },
+];
 
 // variables
 const visibleCards: Ref<projectCardData[]> = ref(projectList.slice(0, 3));
@@ -73,6 +94,18 @@ const getPreviousCards = () => {
   height: 100%;
   background: rgb(166, 170, 166);
   display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.project-tag-container {
+  width: 100%;
+  height: 50px;
+  /* border: 2px solid purple; */
+  background: black;
+  display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
 }
