@@ -101,13 +101,13 @@ const getPreviousCards = () => {
 
 .project-tag-container {
   width: 100%;
-  height: 50px;
-  /* border: 2px solid purple; */
+  height: auto;
   background: black;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  flex-direction: row-reverse; /* Reverse the order of the flex container */
+  justify-content: flex-end; /* Align content to the end (right side) */
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .arrow-button {

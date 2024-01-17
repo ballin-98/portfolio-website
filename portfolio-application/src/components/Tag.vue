@@ -1,7 +1,9 @@
 <template>
   <div class="tag-container">
     <div class="tag-text">{{ props.title }}</div>
-    <div class="tag-close-button">X</div>
+    <div class="tag-close-button-container">
+      <img src="/assets/close.svg" alt="" />
+    </div>
   </div>
 </template>
 
@@ -17,27 +19,42 @@ const props = defineProps({
 
 <style scoped>
 .tag-container {
-  width: auto; /* Adjusted to accommodate variable content */
+  width: auto;
   height: 20px;
-  padding: 4px 12px; /* Increased padding for a more tag-like appearance */
+  padding: 4px 8px 4px 12px; /* Adjusted right padding */
   margin: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  white-space: nowrap;
+
   color: #424141;
-  border-radius: 6px; /* Increased border radius for a rounded look */
+  border-radius: 6px;
   border: 2px solid #9e9e9e;
   background-color: #c9c9c9;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.tag-text {
   font-size: 10px;
   font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Added box-shadow transition */
-  display: inline-flex; /* Changed to inline-flex for better tag-like alignment */
+  text-align: center;
+  margin-right: 8px; /* Adjusted right margin */
+}
+
+.tag-close-button-container {
+  display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Added box shadow for a lifted appearance */
 }
 
 .tag-container:hover {
-  background-color: #b0b0b0; /* Darker shade on hover */
-  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3); /* Increased box shadow on hover */
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.tag-close-button-container img {
+  height: 16px;
 }
 </style>
