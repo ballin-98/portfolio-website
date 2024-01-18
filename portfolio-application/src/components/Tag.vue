@@ -1,26 +1,33 @@
 <template>
   <div class="tag-container">
     <div class="tag-text">{{ props.title }}</div>
-    <div class="tag-close-button-container">
+    <div class="tag-close-button-container" @click="closeTag">
       <img src="/assets/close.svg" alt="" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { defineProps } from "vue";
+import { defineProps, defineEmits } from "vue";
+
+const emit = defineEmits(["close"]);
 const props = defineProps({
   title: {
     type: String,
     default: "Tag",
   },
 });
+
+const closeTag = () => {
+  console.log("closing the tag: ", props.title);
+  emit("close", props.title);
+};
 </script>
 
 <style scoped>
 .tag-container {
   width: auto;
-  height: 12px;
+  height: 16px;
   padding: 4px 8px 4px 12px; /* Adjusted right padding */
   margin: 4px;
   display: flex;
@@ -42,7 +49,7 @@ const props = defineProps({
 }
 
 .tag-text {
-  font-size: 10px;
+  font-size: 12px;
   font-weight: bold;
   text-align: center;
   margin-right: 8px; /* Adjusted right margin */

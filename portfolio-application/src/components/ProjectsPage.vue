@@ -1,7 +1,13 @@
 <template>
   <div class="projects-page-container" id="project-page">
     <div class="project-tag-container">
-      <Tag v-for="tag in tagList" :key="tag.title" :title="tag.title"></Tag>
+      <Tag
+        v-for="tag in tagsToDisplay"
+        :key="tag.title"
+        :title="tag.title"
+        @close="removeTag"
+      ></Tag>
+      <Dropdown></Dropdown>
     </div>
     <div class="projects-container">
       <div
@@ -34,16 +40,17 @@
 <script setup lang="ts">
 // imports
 import ProjectCard from "@/components/ProjectCard.vue";
+import Dropdown from "./Dropdown.vue";
 import { projectList } from "@/projectData";
 import { Ref, computed, ref } from "vue";
 import type { projectCardData } from "@/projectData";
 import Tag from "@/components/Tag.vue";
 
-type Tagg = {
+type TagDto = {
   title: string;
 };
 
-const tagList: Tagg[] = [
+const allTags: TagDto[] = [
   { title: "React" },
   { title: "Vue" },
   { title: "C#" },
@@ -59,7 +66,22 @@ const tagList: Tagg[] = [
   { title: "Python" },
   { title: "Selenium" },
   { title: "C" },
+  { title: "Critical Thinking" },
+  { title: "Stress Testing" },
+  { title: "API" },
+  { title: "E2E Testing" },
+  { title: "SQL" },
+  { title: "Responsive Web Design" },
+  { title: "DevOps" },
 ];
+
+const tagsToDisplay: Ref<TagDto[]> = ref(allTags);
+
+const removeTag = (tagToRemove: string) => {
+  tagsToDisplay.value = tagsToDisplay.value.filter((tag) => {
+    return tag.title !== tagToRemove;
+  });
+};
 
 // variables
 const visibleCards: Ref<projectCardData[]> = ref(projectList.slice(0, 3));
@@ -111,7 +133,8 @@ const getPreviousCards = () => {
   justify-content: flex-end; /* Align content to the end (right side) */
   align-items: center;
   flex-wrap: wrap;
-  padding: 20px;
+  /* padding: 20px; */
+  border: 2px solid red;
 }
 
 .arrow-button {
