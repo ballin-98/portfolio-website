@@ -20,7 +20,7 @@ const props = defineProps({
 <style scoped>
 .tag-container {
   width: auto;
-  height: 20px;
+  height: 12px;
   padding: 4px 8px 4px 12px; /* Adjusted right padding */
   margin: 4px;
   display: flex;
@@ -37,6 +37,10 @@ const props = defineProps({
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
+.tag-container:hover {
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+}
+
 .tag-text {
   font-size: 10px;
   font-weight: bold;
@@ -50,8 +54,8 @@ const props = defineProps({
   justify-content: center;
 }
 
-.tag-container:hover {
-  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+.tag-close-button-container:hover {
+  background: grey;
 }
 
 .tag-close-button-container img {

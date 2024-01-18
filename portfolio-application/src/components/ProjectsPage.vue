@@ -56,6 +56,9 @@ const tagList: Tagg[] = [
   { title: "JavaSript" },
   { title: "TypeScript" },
   { title: "HTML" },
+  { title: "Python" },
+  { title: "Selenium" },
+  { title: "C" },
 ];
 
 // variables
@@ -100,7 +103,7 @@ const getPreviousCards = () => {
 }
 
 .project-tag-container {
-  width: 100%;
+  width: calc(100% - 40px);
   height: auto;
   background: black;
   display: flex;
@@ -108,6 +111,7 @@ const getPreviousCards = () => {
   justify-content: flex-end; /* Align content to the end (right side) */
   align-items: center;
   flex-wrap: wrap;
+  padding: 20px;
 }
 
 .arrow-button {
