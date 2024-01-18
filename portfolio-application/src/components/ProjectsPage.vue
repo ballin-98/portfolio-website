@@ -7,7 +7,6 @@
         :title="tag.title"
         @close="removeTag"
       ></Tag>
-      <Dropdown></Dropdown>
     </div>
     <div class="projects-container">
       <div
@@ -34,6 +33,7 @@
         <img src="/assets/chevron_right.svg" alt="" />
       </div>
     </div>
+    <Dropdown></Dropdown>
   </div>
 </template>
 
