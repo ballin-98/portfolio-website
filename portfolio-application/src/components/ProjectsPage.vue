@@ -2,10 +2,11 @@
   <div class="projects-page-container" id="project-page">
     <div class="project-tag-container">
       <Tag
-        v-for="tag in tagsToDisplay"
+        v-for="tag in computedTagsToDisplay"
         :key="tag.title"
         :title="tag.title"
-        @close="removeTag"
+        :show-tag="tag.showTag"
+        @click="updateTagVisibility(tag.title)"
       ></Tag>
     </div>
     <div class="projects-container">
@@ -33,14 +34,12 @@
         <img src="/assets/chevron_right.svg" alt="" />
       </div>
     </div>
-    <Dropdown></Dropdown>
   </div>
 </template>
 
 <script setup lang="ts">
 // imports
 import ProjectCard from "@/components/ProjectCard.vue";
-import Dropdown from "./Dropdown.vue";
 import { projectList } from "@/projectData";
 import { Ref, computed, ref } from "vue";
 import type { projectCardData } from "@/projectData";
@@ -48,39 +47,48 @@ import Tag from "@/components/Tag.vue";
 
 type TagDto = {
   title: string;
+  showTag: boolean;
 };
 
 const allTags: TagDto[] = [
-  { title: "React" },
-  { title: "Vue" },
-  { title: "C#" },
-  { title: "DOTNET CORE" },
-  { title: "Web Development" },
-  { title: "Backend Development" },
-  { title: "Design" },
-  { title: "API Development" },
-  { title: "Mobile Development" },
-  { title: "JavaSript" },
-  { title: "TypeScript" },
-  { title: "HTML" },
-  { title: "Python" },
-  { title: "Selenium" },
-  { title: "C" },
-  { title: "Critical Thinking" },
-  { title: "Stress Testing" },
-  { title: "API" },
-  { title: "E2E Testing" },
-  { title: "SQL" },
-  { title: "Responsive Web Design" },
-  { title: "DevOps" },
+  { title: "React", showTag: true },
+  { title: "Vue", showTag: true },
+  { title: "C#", showTag: true },
+  { title: "DOTNET CORE", showTag: true },
+  { title: "Web Development", showTag: true },
+  { title: "Backend Development", showTag: true },
+  { title: "Design", showTag: true },
+  { title: "API Development", showTag: true },
+  { title: "Mobile Development", showTag: true },
+  { title: "JavaSript", showTag: true },
+  { title: "TypeScript", showTag: true },
+  { title: "HTML", showTag: true },
+  { title: "Python", showTag: true },
+  { title: "Selenium", showTag: true },
+  { title: "C", showTag: true },
+  { title: "Critical Thinking", showTag: true },
+  { title: "Stress Testing", showTag: true },
+  { title: "API", showTag: true },
+  { title: "E2E Testing", showTag: true },
+  { title: "SQL", showTag: true },
+  { title: "Responsive Web Design", showTag: true },
+  { title: "DevOps", showTag: true },
 ];
 
 const tagsToDisplay: Ref<TagDto[]> = ref(allTags);
+const computedTagsToDisplay = computed(() => tagsToDisplay.value);
 
-const removeTag = (tagToRemove: string) => {
-  tagsToDisplay.value = tagsToDisplay.value.filter((tag) => {
-    return tag.title !== tagToRemove;
-  });
+// Function to update the 'showTag' property for a specific tag
+const updateTagVisibility = (tagTitle: string) => {
+  const tagIndex = tagsToDisplay.value.findIndex(
+    (tag) => tag.title === tagTitle
+  );
+  console.log("here, ", tagIndex);
+  if (tagIndex !== -1) {
+    tagsToDisplay.value[tagIndex].showTag =
+      !tagsToDisplay.value[tagIndex].showTag;
+    console.log("updateds");
+  }
 };
 
 // variables
