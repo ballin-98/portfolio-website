@@ -1,5 +1,5 @@
 <template>
-  <div class="tag-container">
+  <div class="tag-container" :class="{ 'tag-closed': !props.showTag }">
     <div class="tag-text">{{ props.title }}</div>
     <div class="tag-close-button-container" @click="closeTag">
       <img
@@ -21,7 +21,7 @@ const props = defineProps({
   },
   showTag: {
     type: Boolean,
-    default: false,
+    default: true,
   },
 });
 
@@ -74,5 +74,9 @@ const closeTag = () => {
 
 .tag-close-button-container img {
   height: 16px;
+}
+
+.tag-closed {
+  opacity: 0.5;
 }
 </style>
