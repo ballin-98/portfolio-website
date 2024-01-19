@@ -1,8 +1,11 @@
 <template>
-  <div class="tag-container">
+  <div class="tag-container" :class="{ 'tag-closed': !props.showTag }">
     <div class="tag-text">{{ props.title }}</div>
     <div class="tag-close-button-container" @click="closeTag">
-      <img src="/assets/close.svg" alt="" />
+      <img
+        :src="props.showTag ? '/assets/close.svg' : '/assets/add.svg'"
+        alt=""
+      />
     </div>
   </div>
 </template>
@@ -15,6 +18,10 @@ const props = defineProps({
   title: {
     type: String,
     default: "Tag",
+  },
+  showTag: {
+    type: Boolean,
+    default: true,
   },
 });
 
@@ -67,5 +74,9 @@ const closeTag = () => {
 
 .tag-close-button-container img {
   height: 16px;
+}
+
+.tag-closed {
+  opacity: 0.5;
 }
 </style>
