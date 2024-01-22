@@ -6,7 +6,7 @@
         :key="tag.title"
         :title="tag.title"
         :show-tag="tag.showTag"
-        @click="updateTagVisibility(tag.title)"
+        @click="handleTagVisibility(tag.title)"
       ></Tag>
     </div>
     <div class="projects-container">
@@ -76,21 +76,24 @@ const allTags: TagDto[] = [
   { title: "DevOps", showTag: true },
 ];
 
+// refs
 const tagsToDisplay: Ref<TagDto[]> = ref(allTags);
 const computedTagsToDisplay = computed(() => tagsToDisplay.value);
-// const allTagsClicked = ref(false);
+
+// computed values
 const tagClicked = computed(() => {
   return tagsToDisplay.value
     .slice(1, tagsToDisplay.value.length)
     .some((tag) => tag.showTag === false);
 });
-// Function to update the 'showTag' property for a specific tag
-const updateTagVisibility = (tagTitle: string) => {
+
+// function to update tag visibility
+const handleTagVisibility = (tagTitle: string) => {
   const tagIndex = tagsToDisplay.value.findIndex(
     (tag) => tag.title === tagTitle
   );
   if (tagIndex === 0) {
-    handleAllTagsVisibilityUpdate();
+    updateEveryTag();
   } else {
     tagsToDisplay.value[tagIndex].showTag =
       !tagsToDisplay.value[tagIndex].showTag;
@@ -98,6 +101,7 @@ const updateTagVisibility = (tagTitle: string) => {
   }
 };
 
+// function to determine if the tag "All" should be displayed
 const handleAllTagVisibility = () => {
   console.log(tagClicked.value);
   if (tagClicked.value) {
@@ -106,7 +110,9 @@ const handleAllTagVisibility = () => {
     tagsToDisplay.value[0].showTag = true;
   }
 };
-const handleAllTagsVisibilityUpdate = () => {
+
+// function to update every tag if "All" tag was clicked
+const updateEveryTag = () => {
   console.log(tagClicked.value);
   // we just need to know if it's visible or not and update based on that
   if (tagClicked.value) {
