@@ -103,7 +103,6 @@ const handleTagVisibility = (tagTitle: string) => {
 
 // function to determine if the tag "All" should be displayed
 const handleAllTagVisibility = () => {
-  console.log(tagClicked.value);
   if (tagClicked.value) {
     tagsToDisplay.value[0].showTag = false;
   } else {
@@ -113,7 +112,6 @@ const handleAllTagVisibility = () => {
 
 // function to update every tag if "All" tag was clicked
 const updateEveryTag = () => {
-  console.log(tagClicked.value);
   // we just need to know if it's visible or not and update based on that
   if (tagClicked.value) {
     // we know that all tags here is not active
