@@ -144,21 +144,17 @@ const getPreviousCards = () => {
 
 .project-tag-container {
   width: calc(100% - 40px);
-  height: auto;
-  background: black;
+  height: 100px;
   display: flex;
-
   justify-content: flex-start; /* Align content to the end (right side) */
   align-items: center;
   flex-wrap: wrap;
-  /* padding: 20px; */
   border: 2px solid red;
 }
 
 .arrow-button {
   width: 100px;
   font-size: 24px;
-  /* border: 1px solid black; */
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -187,7 +183,6 @@ const getPreviousCards = () => {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  /* border: 2px solid white; */
 }
 .fade-enter-active,
 .fade-leave-active {

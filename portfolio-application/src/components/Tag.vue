@@ -36,7 +36,7 @@ const closeTag = () => {
   width: auto;
   height: 16px;
   padding: 4px 8px 4px 12px; /* Adjusted right padding */
-  margin: 4px;
+  margin: 0px 6px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -47,12 +47,13 @@ const closeTag = () => {
   border: 2px solid #9e9e9e;
   background-color: #c9c9c9;
   cursor: pointer;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  transition: 0.1s ease;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .tag-container:hover {
-  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+  background-color: #a0a0a0;
+  transform: scale(1.1);
 }
 
 .tag-text {
