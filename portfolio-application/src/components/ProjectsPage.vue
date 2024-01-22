@@ -85,7 +85,6 @@ const updateTagVisibility = (tagTitle: string) => {
   const tagIndex = tagsToDisplay.value.findIndex(
     (tag) => tag.title === tagTitle
   );
-  console.log(tagIndex);
   if (tagIndex === 0) {
     handleAllTagsVisibilityUpdate();
   } else {
