@@ -78,8 +78,12 @@ const allTags: TagDto[] = [
 
 const tagsToDisplay: Ref<TagDto[]> = ref(allTags);
 const computedTagsToDisplay = computed(() => tagsToDisplay.value);
-const allTagsClicked = ref(false);
-
+// const allTagsClicked = ref(false);
+const tagClicked = computed(() => {
+  return tagsToDisplay.value
+    .slice(1, tagsToDisplay.value.length)
+    .some((tag) => tag.showTag === false);
+});
 // Function to update the 'showTag' property for a specific tag
 const updateTagVisibility = (tagTitle: string) => {
   const tagIndex = tagsToDisplay.value.findIndex(
@@ -90,14 +94,31 @@ const updateTagVisibility = (tagTitle: string) => {
   } else {
     tagsToDisplay.value[tagIndex].showTag =
       !tagsToDisplay.value[tagIndex].showTag;
+    handleAllTagVisibility();
   }
 };
 
+const handleAllTagVisibility = () => {
+  console.log(tagClicked.value);
+  if (tagClicked.value) {
+    tagsToDisplay.value[0].showTag = false;
+  } else {
+    tagsToDisplay.value[0].showTag = true;
+  }
+};
 const handleAllTagsVisibilityUpdate = () => {
-  tagsToDisplay.value.forEach((tag) => {
-    tag.showTag = !allTagsClicked.value;
-  });
-  allTagsClicked.value = !allTagsClicked.value;
+  console.log(tagClicked.value);
+  // we just need to know if it's visible or not and update based on that
+  if (tagClicked.value) {
+    // we know that all tags here is not active
+    tagsToDisplay.value.forEach((tag) => {
+      tag.showTag = true;
+    });
+  } else {
+    tagsToDisplay.value.forEach((tag) => {
+      tag.showTag = false;
+    });
+  }
 };
 
 // variables
