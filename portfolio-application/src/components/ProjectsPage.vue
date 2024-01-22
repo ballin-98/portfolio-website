@@ -51,6 +51,7 @@ type TagDto = {
 };
 
 const allTags: TagDto[] = [
+  { title: "All", showTag: true },
   { title: "React", showTag: true },
   { title: "Vue", showTag: true },
   { title: "C#", showTag: true },
@@ -77,16 +78,27 @@ const allTags: TagDto[] = [
 
 const tagsToDisplay: Ref<TagDto[]> = ref(allTags);
 const computedTagsToDisplay = computed(() => tagsToDisplay.value);
+const allTagsClicked = ref(false);
 
 // Function to update the 'showTag' property for a specific tag
 const updateTagVisibility = (tagTitle: string) => {
   const tagIndex = tagsToDisplay.value.findIndex(
     (tag) => tag.title === tagTitle
   );
-  if (tagIndex !== -1) {
+  console.log(tagIndex);
+  if (tagIndex === 0) {
+    handleAllTagsVisibilityUpdate();
+  } else {
     tagsToDisplay.value[tagIndex].showTag =
       !tagsToDisplay.value[tagIndex].showTag;
   }
+};
+
+const handleAllTagsVisibilityUpdate = () => {
+  tagsToDisplay.value.forEach((tag) => {
+    tag.showTag = !allTagsClicked.value;
+  });
+  allTagsClicked.value = !allTagsClicked.value;
 };
 
 // variables
@@ -135,8 +147,8 @@ const getPreviousCards = () => {
   height: auto;
   background: black;
   display: flex;
-  flex-direction: row-reverse; /* Reverse the order of the flex container */
-  justify-content: flex-end; /* Align content to the end (right side) */
+
+  justify-content: flex-start; /* Align content to the end (right side) */
   align-items: center;
   flex-wrap: wrap;
   /* padding: 20px; */
