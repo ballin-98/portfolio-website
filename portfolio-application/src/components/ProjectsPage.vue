@@ -6,7 +6,7 @@
         :key="tag.title"
         :title="tag.title"
         :show-tag="tag.showTag"
-        @click="updateTagVisibility(tag.title)"
+        @click="handleTagVisibility(tag.title)"
       ></Tag>
     </div>
     <div class="projects-container">
@@ -51,6 +51,7 @@ type TagDto = {
 };
 
 const allTags: TagDto[] = [
+  { title: "All", showTag: true },
   { title: "React", showTag: true },
   { title: "Vue", showTag: true },
   { title: "C#", showTag: true },
@@ -75,17 +76,52 @@ const allTags: TagDto[] = [
   { title: "DevOps", showTag: true },
 ];
 
+// refs
 const tagsToDisplay: Ref<TagDto[]> = ref(allTags);
 const computedTagsToDisplay = computed(() => tagsToDisplay.value);
 
-// Function to update the 'showTag' property for a specific tag
-const updateTagVisibility = (tagTitle: string) => {
+// computed values
+const tagClicked = computed(() => {
+  return tagsToDisplay.value
+    .slice(1, tagsToDisplay.value.length)
+    .some((tag) => tag.showTag === false);
+});
+
+// function to update tag visibility
+const handleTagVisibility = (tagTitle: string) => {
   const tagIndex = tagsToDisplay.value.findIndex(
     (tag) => tag.title === tagTitle
   );
-  if (tagIndex !== -1) {
+  if (tagIndex === 0) {
+    updateEveryTag();
+  } else {
     tagsToDisplay.value[tagIndex].showTag =
       !tagsToDisplay.value[tagIndex].showTag;
+    handleAllTagVisibility();
+  }
+};
+
+// function to determine if the tag "All" should be displayed
+const handleAllTagVisibility = () => {
+  if (tagClicked.value) {
+    tagsToDisplay.value[0].showTag = false;
+  } else {
+    tagsToDisplay.value[0].showTag = true;
+  }
+};
+
+// function to update every tag if "All" tag was clicked
+const updateEveryTag = () => {
+  // we just need to know if it's visible or not and update based on that
+  if (tagClicked.value) {
+    // we know that all tags here is not active
+    tagsToDisplay.value.forEach((tag) => {
+      tag.showTag = true;
+    });
+  } else {
+    tagsToDisplay.value.forEach((tag) => {
+      tag.showTag = false;
+    });
   }
 };
 
@@ -132,21 +168,17 @@ const getPreviousCards = () => {
 
 .project-tag-container {
   width: calc(100% - 40px);
-  height: auto;
-  background: black;
+  height: 100px;
   display: flex;
-  flex-direction: row-reverse; /* Reverse the order of the flex container */
-  justify-content: flex-end; /* Align content to the end (right side) */
+  justify-content: flex-start; /* Align content to the end (right side) */
   align-items: center;
   flex-wrap: wrap;
-  /* padding: 20px; */
   border: 2px solid red;
 }
 
 .arrow-button {
   width: 100px;
   font-size: 24px;
-  /* border: 1px solid black; */
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -175,7 +207,6 @@ const getPreviousCards = () => {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  /* border: 2px solid white; */
 }
 .fade-enter-active,
 .fade-leave-active {
