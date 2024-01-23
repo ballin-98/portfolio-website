@@ -44,37 +44,8 @@ import { projectList } from "@/projectData";
 import { Ref, computed, ref } from "vue";
 import type { projectCardData } from "@/projectData";
 import Tag from "@/components/Tag.vue";
-
-type TagDto = {
-  title: string;
-  showTag: boolean;
-};
-
-const allTags: TagDto[] = [
-  { title: "All", showTag: true },
-  { title: "React", showTag: true },
-  { title: "Vue", showTag: true },
-  { title: "C#", showTag: true },
-  { title: "DOTNET CORE", showTag: true },
-  { title: "Web Development", showTag: true },
-  { title: "Backend Development", showTag: true },
-  { title: "Design", showTag: true },
-  { title: "API Development", showTag: true },
-  { title: "Mobile Development", showTag: true },
-  { title: "JavaSript", showTag: true },
-  { title: "TypeScript", showTag: true },
-  { title: "HTML", showTag: true },
-  { title: "Python", showTag: true },
-  { title: "Selenium", showTag: true },
-  { title: "C", showTag: true },
-  { title: "Critical Thinking", showTag: true },
-  { title: "Stress Testing", showTag: true },
-  { title: "API", showTag: true },
-  { title: "E2E Testing", showTag: true },
-  { title: "SQL", showTag: true },
-  { title: "Responsive Web Design", showTag: true },
-  { title: "DevOps", showTag: true },
-];
+import { TagDto } from "@/projectData";
+import { allTags } from "@/data/tagData";
 
 // refs
 const tagsToDisplay: Ref<TagDto[]> = ref(allTags);
@@ -153,7 +124,6 @@ const getPreviousCards = () => {
     currentIndex.value + 3
   );
 };
-// const getPreviousCard = () => {};
 </script>
 
 <style scoped>
@@ -202,12 +172,16 @@ const getPreviousCards = () => {
 
 .projects-container {
   height: 50%;
-  width: 100%;
+  width: (100%-40px);
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  border: 2px solid purple;
+  margin: 20px;
+  /* gap: 20px; */
 }
+
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.5s;

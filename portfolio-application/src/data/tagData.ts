@@ -1,0 +1,27 @@
+import { TagDto } from "@/projectData";
+
+export const allTags: TagDto[] = [
+  { title: "All", showTag: true },
+  { title: "React", showTag: true },
+  { title: "Vue", showTag: true },
+  { title: "C#", showTag: true },
+  { title: "DOTNET CORE", showTag: true },
+  { title: "Web Development", showTag: true },
+  { title: "Backend Development", showTag: true },
+  { title: "Design", showTag: true },
+  { title: "API Development", showTag: true },
+  { title: "Mobile Development", showTag: true },
+  { title: "JavaSript", showTag: true },
+  { title: "TypeScript", showTag: true },
+  { title: "HTML", showTag: true },
+  { title: "Python", showTag: true },
+  { title: "Selenium", showTag: true },
+  { title: "C", showTag: true },
+  { title: "Critical Thinking", showTag: true },
+  { title: "Stress Testing", showTag: true },
+  { title: "API", showTag: true },
+  { title: "E2E Testing", showTag: true },
+  { title: "SQL", showTag: true },
+  { title: "Responsive Web Design", showTag: true },
+  { title: "DevOps", showTag: true },
+];
