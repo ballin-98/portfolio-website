@@ -18,19 +18,19 @@ export const projectList: projectCardData[] = [
     title: "project 1",
     description: "description 1",
     image: "/assets/p2.jpg",
-    tags: allTags.slice(1, 5),
+    tags: [{ title: "C#", showTag: true }],
   },
   {
     title: "project 2",
     description: "description 2",
     image: "/assets/p3.jpg",
-    tags: allTags.slice(2, 5),
+    tags: [{ title: "Vue", showTag: true }],
   },
   {
     title: "project 3",
     description: "description 3",
     image: "/assets/p4.jpg",
-    tags: allTags.slice(3, 5),
+    tags: [{ title: "React", showTag: true }],
   },
   {
     title: "project 4",

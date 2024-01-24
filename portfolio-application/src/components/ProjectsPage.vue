@@ -19,7 +19,7 @@
       </div>
       <transition name="fade" mode="out-in"></transition>
       <ProjectCard
-        v-for="project in visibleCards"
+        v-for="project in computedCardsToDisplay"
         :key="project.title"
         :title="project.title"
         :description="project.description"
@@ -50,12 +50,23 @@ import { allTags } from "@/data/tagData";
 // refs
 const tagsToDisplay: Ref<TagDto[]> = ref(allTags);
 const computedTagsToDisplay = computed(() => tagsToDisplay.value);
+const computedCardsToDisplay = computed(() => visibleCards.value.slice(0, 3));
+const visibleCards: Ref<projectCardData[]> = ref(projectList.slice(0, 3));
+const currentIndex = ref<number>(0);
 
 // computed values
 const tagClicked = computed(() => {
   return tagsToDisplay.value
     .slice(1, tagsToDisplay.value.length)
     .some((tag) => tag.showTag === false);
+});
+
+const disableRight = computed(() => {
+  return currentIndex.value + 3 == projectList.length ? true : false;
+});
+
+const disableLeft = computed(() => {
+  return currentIndex.value == 0 ? true : false;
 });
 
 // function to update tag visibility
@@ -70,6 +81,7 @@ const handleTagVisibility = (tagTitle: string) => {
       !tagsToDisplay.value[tagIndex].showTag;
     handleAllTagVisibility();
   }
+  visibleCards.value = filterCardsByTag();
 };
 
 // function to determine if the tag "All" should be displayed
@@ -96,17 +108,24 @@ const updateEveryTag = () => {
   }
 };
 
-// variables
-const visibleCards: Ref<projectCardData[]> = ref(projectList.slice(0, 3));
-const currentIndex = ref<number>(0);
+const filterCardsByTag = () => {
+  const filteredProjects = projectList.filter((project) => {
+    const overlap = checkForOverlap(project.tags);
+    return overlap.length !== 0;
+  });
+  console.log("filtered projects: ", filteredProjects);
+  return filteredProjects;
+};
 
-const disableRight = computed(() => {
-  return currentIndex.value + 3 == projectList.length ? true : false;
-});
-
-const disableLeft = computed(() => {
-  return currentIndex.value == 0 ? true : false;
-});
+const checkForOverlap = (tags: TagDto[]) => {
+  const overlap = tags.filter((tag) => {
+    return tagsToDisplay.value.some(
+      (displayTag) => tag.title === displayTag.title && displayTag.showTag
+    );
+  });
+  console.log("overlap: ", overlap);
+  return overlap;
+};
 
 // functions
 const getNextCards = () => {
