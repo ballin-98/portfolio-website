@@ -67,14 +67,21 @@ const initalizeCircularArray = () => {
 initalizeCircularArray();
 
 const getNextCards = () => {
-  const projects = [];
+  let projects: projectCardData[] = [];
   console.log("current: ", circularArrayProjects.getCurrent());
-  for (let i = 0; i < 3; i++) {
-    circularArrayProjects.moveNext();
-    projects.push(circularArrayProjects.getCurrent() as projectCardData);
-  }
+  // for (let i = 0; i < 3; i++) {
+  //   circularArrayProjects.moveNext();
+  //   projects.push(circularArrayProjects.getCurrent() as projectCardData);
+  // }
+  const current = circularArrayProjects.getCurrent() as projectCardData;
+  circularArrayProjects.movePrevious();
+  const previous = circularArrayProjects.getCurrent() as projectCardData;
+  circularArrayProjects.moveNext();
+  circularArrayProjects.moveNext();
+  const next = circularArrayProjects.getCurrent() as projectCardData;
+  projects = [previous, current, next];
   console.log("next projects: ", projects);
-  // Update displayedProjects with the new set of projects
+  // we're at next
   visibleCards.value = projects;
   for (let i = 0; i < 2; i++) {
     circularArrayProjects.movePrevious();
@@ -82,17 +89,20 @@ const getNextCards = () => {
 };
 
 const getPreviousCards = () => {
-  const projects = [];
+  let projects: projectCardData[] = [];
   console.log("current: ", circularArrayProjects.getCurrent());
-  for (let i = 0; i < 3; i++) {
-    circularArrayProjects.movePrevious();
-    projects.push(circularArrayProjects.getCurrent() as projectCardData);
-  }
+  circularArrayProjects.moveNext();
+  const first = circularArrayProjects.getCurrent() as projectCardData;
+  circularArrayProjects.moveNext();
+  const second = circularArrayProjects.getCurrent() as projectCardData;
+  circularArrayProjects.moveNext();
+  const third = circularArrayProjects.getCurrent() as projectCardData;
+  projects = [first, second, third];
   console.log("previous projects: ", projects);
   // Update displayedProjects with the new set of projects
   visibleCards.value = projects;
   for (let i = 0; i < 2; i++) {
-    circularArrayProjects.moveNext();
+    circularArrayProjects.movePrevious();
   }
 };
 
