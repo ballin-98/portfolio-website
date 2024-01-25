@@ -10,27 +10,19 @@
       ></Tag>
     </div>
     <div class="projects-container">
-      <div
-        class="arrow-button"
-        :class="{ hidden: disableLeft }"
-        @click="getPreviousCards"
-      >
+      <div class="arrow-button" @click="getPreviousCards">
         <img src="/assets/chevron_left.svg" alt="" />
       </div>
       <transition name="fade" mode="out-in"></transition>
       <ProjectCard
-        v-for="project in computedCardsToDisplay"
+        v-for="project in visibleCards"
         :key="project.title"
         :title="project.title"
         :description="project.description"
         :image="project.image"
       ></ProjectCard>
       <transition />
-      <div
-        class="arrow-button"
-        :class="{ hidden: disableRight }"
-        @click="getNextCards"
-      >
+      <div class="arrow-button" @click="getNextCards">
         <img src="/assets/chevron_right.svg" alt="" />
       </div>
     </div>
@@ -51,29 +43,13 @@ import { CircularArray } from "@/helpers/dataStructures";
 // refs
 const tagsToDisplay: Ref<TagDto[]> = ref(allTags);
 const computedTagsToDisplay = computed(() => tagsToDisplay.value);
-const computedCardsToDisplay = computed(() => visibleCards.value.slice(0, 3));
 
 // we start with this
-const visibleCards: Ref<projectCardData[]> = ref(projectList);
-const currentIndex = ref<number>(0);
-const currentMinIndex = computed(() => {
-  let currentMin = Infinity;
-  for (let i = 0; i < visibleCards.value.length; i++) {
-    if (visibleCards.value[i].index < currentMin) {
-      currentMin = i;
-    }
-  }
-  return currentMin;
-});
-const currentMaxIndex = computed(() => {
-  let currentMax = Number.NEGATIVE_INFINITY;
-  for (let i = 0; i < visibleCards.value.length; i++) {
-    if (visibleCards.value[i].index > currentMax) {
-      currentMax = i;
-    }
-  }
-  return currentMax;
-});
+const visibleCards: Ref<projectCardData[]> = ref(projectList.slice(0, 3));
+
+const circularArrayProjects = new CircularArray<projectCardData>(
+  projectList.length
+);
 
 // computed values
 const tagClicked = computed(() => {
@@ -82,29 +58,42 @@ const tagClicked = computed(() => {
     .some((tag) => tag.showTag === false);
 });
 
-const disableRight = computed(() => {
-  return currentIndex.value + 3 == projectList.length ? true : false;
-});
+const initalizeCircularArray = () => {
+  projectList.forEach((project) => {
+    circularArrayProjects.push(project);
+  });
+};
 
-const disableLeft = computed(() => {
-  return currentIndex.value == 0 ? true : false;
-});
+initalizeCircularArray();
 
-// functions
 const getNextCards = () => {
-  console.log(visibleCards.value);
-  visibleCards.value = projectList.slice(
-    currentIndex.value,
-    currentIndex.value + 3
-  );
+  const projects = [];
+  console.log("current: ", circularArrayProjects.getCurrent());
+  for (let i = 0; i < 3; i++) {
+    circularArrayProjects.moveNext();
+    projects.push(circularArrayProjects.getCurrent() as projectCardData);
+  }
+  console.log("next projects: ", projects);
+  // Update displayedProjects with the new set of projects
+  visibleCards.value = projects;
+  for (let i = 0; i < 2; i++) {
+    circularArrayProjects.movePrevious();
+  }
 };
 
 const getPreviousCards = () => {
-  currentIndex.value -= 1;
-  visibleCards.value = projectList.slice(
-    currentIndex.value,
-    currentIndex.value + 3
-  );
+  const projects = [];
+  console.log("current: ", circularArrayProjects.getCurrent());
+  for (let i = 0; i < 3; i++) {
+    circularArrayProjects.movePrevious();
+    projects.push(circularArrayProjects.getCurrent() as projectCardData);
+  }
+  console.log("previous projects: ", projects);
+  // Update displayedProjects with the new set of projects
+  visibleCards.value = projects;
+  for (let i = 0; i < 2; i++) {
+    circularArrayProjects.moveNext();
+  }
 };
 
 // function to update tag visibility
@@ -119,7 +108,9 @@ const handleTagVisibility = (tagTitle: string) => {
       !tagsToDisplay.value[tagIndex].showTag;
     handleAllTagVisibility();
   }
-  visibleCards.value = filterCardsByTag();
+  const someCards = filterCardsByTag();
+  circularArrayProjects.reset(someCards);
+  visibleCards.value = someCards.slice(0, 3);
 };
 
 // function to determine if the tag "All" should be displayed
