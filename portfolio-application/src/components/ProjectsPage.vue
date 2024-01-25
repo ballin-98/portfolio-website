@@ -46,13 +46,34 @@ import type { projectCardData } from "@/projectData";
 import Tag from "@/components/Tag.vue";
 import { TagDto } from "@/projectData";
 import { allTags } from "@/data/tagData";
+import { CircularArray } from "@/helpers/dataStructures";
 
 // refs
 const tagsToDisplay: Ref<TagDto[]> = ref(allTags);
 const computedTagsToDisplay = computed(() => tagsToDisplay.value);
 const computedCardsToDisplay = computed(() => visibleCards.value.slice(0, 3));
-const visibleCards: Ref<projectCardData[]> = ref(projectList.slice(0, 3));
+
+// we start with this
+const visibleCards: Ref<projectCardData[]> = ref(projectList);
 const currentIndex = ref<number>(0);
+const currentMinIndex = computed(() => {
+  let currentMin = Infinity;
+  for (let i = 0; i < visibleCards.value.length; i++) {
+    if (visibleCards.value[i].index < currentMin) {
+      currentMin = i;
+    }
+  }
+  return currentMin;
+});
+const currentMaxIndex = computed(() => {
+  let currentMax = Number.NEGATIVE_INFINITY;
+  for (let i = 0; i < visibleCards.value.length; i++) {
+    if (visibleCards.value[i].index > currentMax) {
+      currentMax = i;
+    }
+  }
+  return currentMax;
+});
 
 // computed values
 const tagClicked = computed(() => {
@@ -68,6 +89,23 @@ const disableRight = computed(() => {
 const disableLeft = computed(() => {
   return currentIndex.value == 0 ? true : false;
 });
+
+// functions
+const getNextCards = () => {
+  console.log(visibleCards.value);
+  visibleCards.value = projectList.slice(
+    currentIndex.value,
+    currentIndex.value + 3
+  );
+};
+
+const getPreviousCards = () => {
+  currentIndex.value -= 1;
+  visibleCards.value = projectList.slice(
+    currentIndex.value,
+    currentIndex.value + 3
+  );
+};
 
 // function to update tag visibility
 const handleTagVisibility = (tagTitle: string) => {
@@ -113,7 +151,6 @@ const filterCardsByTag = () => {
     const overlap = checkForOverlap(project.tags);
     return overlap.length !== 0;
   });
-  console.log("filtered projects: ", filteredProjects);
   return filteredProjects;
 };
 
@@ -123,25 +160,7 @@ const checkForOverlap = (tags: TagDto[]) => {
       (displayTag) => tag.title === displayTag.title && displayTag.showTag
     );
   });
-  console.log("overlap: ", overlap);
   return overlap;
-};
-
-// functions
-const getNextCards = () => {
-  currentIndex.value += 1;
-  visibleCards.value = projectList.slice(
-    currentIndex.value,
-    currentIndex.value + 3
-  );
-};
-
-const getPreviousCards = () => {
-  currentIndex.value -= 1;
-  visibleCards.value = projectList.slice(
-    currentIndex.value,
-    currentIndex.value + 3
-  );
 };
 </script>
 
