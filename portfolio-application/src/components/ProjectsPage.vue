@@ -12,8 +12,8 @@
     <div class="projects-container">
       <div
         class="arrow-button"
-        :class="{ hidden: disableLeft }"
         @click="getPreviousCards"
+        :class="{ hidden: !canScroll }"
       >
         <img src="/assets/chevron_left.svg" alt="" />
       </div>
@@ -28,8 +28,8 @@
       <transition />
       <div
         class="arrow-button"
-        :class="{ hidden: disableRight }"
         @click="getNextCards"
+        :class="{ hidden: !canScroll }"
       >
         <img src="/assets/chevron_right.svg" alt="" />
       </div>
@@ -44,41 +44,20 @@ import { projectList } from "@/projectData";
 import { Ref, computed, ref } from "vue";
 import type { projectCardData } from "@/projectData";
 import Tag from "@/components/Tag.vue";
-
-type TagDto = {
-  title: string;
-  showTag: boolean;
-};
-
-const allTags: TagDto[] = [
-  { title: "All", showTag: true },
-  { title: "React", showTag: true },
-  { title: "Vue", showTag: true },
-  { title: "C#", showTag: true },
-  { title: "DOTNET CORE", showTag: true },
-  { title: "Web Development", showTag: true },
-  { title: "Backend Development", showTag: true },
-  { title: "Design", showTag: true },
-  { title: "API Development", showTag: true },
-  { title: "Mobile Development", showTag: true },
-  { title: "JavaSript", showTag: true },
-  { title: "TypeScript", showTag: true },
-  { title: "HTML", showTag: true },
-  { title: "Python", showTag: true },
-  { title: "Selenium", showTag: true },
-  { title: "C", showTag: true },
-  { title: "Critical Thinking", showTag: true },
-  { title: "Stress Testing", showTag: true },
-  { title: "API", showTag: true },
-  { title: "E2E Testing", showTag: true },
-  { title: "SQL", showTag: true },
-  { title: "Responsive Web Design", showTag: true },
-  { title: "DevOps", showTag: true },
-];
+import { TagDto } from "@/projectData";
+import { allTags } from "@/data/tagData";
+import { CircularArray } from "@/helpers/dataStructures";
 
 // refs
 const tagsToDisplay: Ref<TagDto[]> = ref(allTags);
 const computedTagsToDisplay = computed(() => tagsToDisplay.value);
+
+// we start with this
+const visibleCards: Ref<projectCardData[]> = ref(projectList.slice(0, 3));
+
+const circularArrayProjects = new CircularArray<projectCardData>(
+  projectList.length
+);
 
 // computed values
 const tagClicked = computed(() => {
@@ -86,6 +65,52 @@ const tagClicked = computed(() => {
     .slice(1, tagsToDisplay.value.length)
     .some((tag) => tag.showTag === false);
 });
+
+const canScroll = ref(true);
+
+const initalizeCircularArray = () => {
+  projectList.forEach((project) => {
+    circularArrayProjects.push(project);
+  });
+};
+
+initalizeCircularArray();
+
+const getNextNthCard = (n: number): projectCardData => {
+  for (let i = 0; i < n; i++) {
+    circularArrayProjects.moveNext();
+  }
+  return circularArrayProjects.getCurrent() as projectCardData;
+};
+
+const getPrevNthCard = (n: number): projectCardData => {
+  for (let i = 0; i < n; i++) {
+    circularArrayProjects.movePrevious();
+  }
+  return circularArrayProjects.getCurrent() as projectCardData;
+};
+
+const getNextCards = () => {
+  let projects: projectCardData[] = [];
+  const current = circularArrayProjects.getCurrent() as projectCardData;
+  const previous = getPrevNthCard(1);
+  const next = getNextNthCard(2);
+  projects = [previous, current, next];
+  // we're at next
+  visibleCards.value = projects;
+  getPrevNthCard(2);
+};
+
+const getPreviousCards = () => {
+  let projects: projectCardData[] = [];
+  const first = getNextNthCard(1);
+  const second = getNextNthCard(1);
+  const third = getNextNthCard(1);
+  projects = [first, second, third];
+  // Update displayedProjects with the new set of projects
+  visibleCards.value = projects;
+  getPrevNthCard(2);
+};
 
 // function to update tag visibility
 const handleTagVisibility = (tagTitle: string) => {
@@ -99,6 +124,14 @@ const handleTagVisibility = (tagTitle: string) => {
       !tagsToDisplay.value[tagIndex].showTag;
     handleAllTagVisibility();
   }
+  const someCards = filterCardsByTag();
+  circularArrayProjects.reset(someCards);
+  if (circularArrayProjects.array.length <= 3) {
+    canScroll.value = false;
+  } else {
+    canScroll.value = true;
+  }
+  visibleCards.value = someCards.slice(0, 3);
 };
 
 // function to determine if the tag "All" should be displayed
@@ -125,35 +158,22 @@ const updateEveryTag = () => {
   }
 };
 
-// variables
-const visibleCards: Ref<projectCardData[]> = ref(projectList.slice(0, 3));
-const currentIndex = ref<number>(0);
-
-const disableRight = computed(() => {
-  return currentIndex.value + 3 == projectList.length ? true : false;
-});
-
-const disableLeft = computed(() => {
-  return currentIndex.value == 0 ? true : false;
-});
-
-// functions
-const getNextCards = () => {
-  currentIndex.value += 1;
-  visibleCards.value = projectList.slice(
-    currentIndex.value,
-    currentIndex.value + 3
-  );
+const filterCardsByTag = () => {
+  const filteredProjects = projectList.filter((project) => {
+    const overlap = checkForOverlap(project.tags);
+    return overlap.length !== 0;
+  });
+  return filteredProjects;
 };
 
-const getPreviousCards = () => {
-  currentIndex.value -= 1;
-  visibleCards.value = projectList.slice(
-    currentIndex.value,
-    currentIndex.value + 3
-  );
+const checkForOverlap = (tags: TagDto[]) => {
+  const overlap = tags.filter((tag) => {
+    return tagsToDisplay.value.some(
+      (displayTag) => tag.title === displayTag.title && displayTag.showTag
+    );
+  });
+  return overlap;
 };
-// const getPreviousCard = () => {};
 </script>
 
 <style scoped>
@@ -202,12 +222,16 @@ const getPreviousCards = () => {
 
 .projects-container {
   height: 50%;
-  width: 100%;
+  width: (100%-40px);
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  border: 2px solid purple;
+  margin: 20px;
+  /* gap: 20px; */
 }
+
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.5s;
