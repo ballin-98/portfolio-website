@@ -10,7 +10,11 @@
       ></Tag>
     </div>
     <div class="projects-container">
-      <div class="arrow-button" @click="getPreviousCards">
+      <div
+        class="arrow-button"
+        @click="getPreviousCards"
+        :class="{ hidden: !canScroll }"
+      >
         <img src="/assets/chevron_left.svg" alt="" />
       </div>
       <transition name="fade" mode="out-in"></transition>
@@ -22,7 +26,11 @@
         :image="project.image"
       ></ProjectCard>
       <transition />
-      <div class="arrow-button" @click="getNextCards">
+      <div
+        class="arrow-button"
+        @click="getNextCards"
+        :class="{ hidden: !canScroll }"
+      >
         <img src="/assets/chevron_right.svg" alt="" />
       </div>
     </div>
@@ -58,6 +66,8 @@ const tagClicked = computed(() => {
     .some((tag) => tag.showTag === false);
 });
 
+const canScroll = ref(true);
+
 const initalizeCircularArray = () => {
   projectList.forEach((project) => {
     circularArrayProjects.push(project);
@@ -66,44 +76,40 @@ const initalizeCircularArray = () => {
 
 initalizeCircularArray();
 
-const getNextCards = () => {
-  let projects: projectCardData[] = [];
-  console.log("current: ", circularArrayProjects.getCurrent());
-  // for (let i = 0; i < 3; i++) {
-  //   circularArrayProjects.moveNext();
-  //   projects.push(circularArrayProjects.getCurrent() as projectCardData);
-  // }
-  const current = circularArrayProjects.getCurrent() as projectCardData;
-  circularArrayProjects.movePrevious();
-  const previous = circularArrayProjects.getCurrent() as projectCardData;
-  circularArrayProjects.moveNext();
-  circularArrayProjects.moveNext();
-  const next = circularArrayProjects.getCurrent() as projectCardData;
-  projects = [previous, current, next];
-  console.log("next projects: ", projects);
-  // we're at next
-  visibleCards.value = projects;
-  for (let i = 0; i < 2; i++) {
+const getNextNthCard = (n: number): projectCardData => {
+  for (let i = 0; i < n; i++) {
+    circularArrayProjects.moveNext();
+  }
+  return circularArrayProjects.getCurrent() as projectCardData;
+};
+
+const getPrevNthCard = (n: number): projectCardData => {
+  for (let i = 0; i < n; i++) {
     circularArrayProjects.movePrevious();
   }
+  return circularArrayProjects.getCurrent() as projectCardData;
+};
+
+const getNextCards = () => {
+  let projects: projectCardData[] = [];
+  const current = circularArrayProjects.getCurrent() as projectCardData;
+  const previous = getPrevNthCard(1);
+  const next = getNextNthCard(2);
+  projects = [previous, current, next];
+  // we're at next
+  visibleCards.value = projects;
+  getPrevNthCard(2);
 };
 
 const getPreviousCards = () => {
   let projects: projectCardData[] = [];
-  console.log("current: ", circularArrayProjects.getCurrent());
-  circularArrayProjects.moveNext();
-  const first = circularArrayProjects.getCurrent() as projectCardData;
-  circularArrayProjects.moveNext();
-  const second = circularArrayProjects.getCurrent() as projectCardData;
-  circularArrayProjects.moveNext();
-  const third = circularArrayProjects.getCurrent() as projectCardData;
+  const first = getNextNthCard(1);
+  const second = getNextNthCard(1);
+  const third = getNextNthCard(1);
   projects = [first, second, third];
-  console.log("previous projects: ", projects);
   // Update displayedProjects with the new set of projects
   visibleCards.value = projects;
-  for (let i = 0; i < 2; i++) {
-    circularArrayProjects.movePrevious();
-  }
+  getPrevNthCard(2);
 };
 
 // function to update tag visibility
@@ -120,6 +126,11 @@ const handleTagVisibility = (tagTitle: string) => {
   }
   const someCards = filterCardsByTag();
   circularArrayProjects.reset(someCards);
+  if (circularArrayProjects.array.length <= 3) {
+    canScroll.value = false;
+  } else {
+    canScroll.value = true;
+  }
   visibleCards.value = someCards.slice(0, 3);
 };
 
