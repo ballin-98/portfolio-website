@@ -2,10 +2,10 @@
   <div class="nav-bar-container">
     <div class="left-container">
       <a @click="doSomething">
-        <div class="left-container-link">About</div>
+        <div class="left-container-link">ABOUT</div>
       </a>
       <a href="#project-page">
-        <div class="left-container-link">Projects</div>
+        <div class="left-container-link">PROJECTS</div>
       </a>
     </div>
     <div class="center-container">

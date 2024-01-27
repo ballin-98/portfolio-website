@@ -178,7 +178,7 @@ const checkForOverlap = (tags: TagDto[]) => {
 
 <style scoped>
 .projects-page-container {
-  height: 100%;
+  height: 90vh;
   background: rgb(166, 170, 166);
   display: flex;
   justify-content: center;
