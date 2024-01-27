@@ -2,10 +2,10 @@
   <div class="nav-bar-container">
     <div class="left-container">
       <a @click="doSomething">
-        <div class="left-container-link">About</div>
+        <div class="left-container-link">ABOUT</div>
       </a>
       <a href="#project-page">
-        <div class="left-container-link">Projects</div>
+        <div class="left-container-link">PROJECTS</div>
       </a>
     </div>
     <div class="center-container">
@@ -41,7 +41,7 @@ const doSomething = () => {
 </script>
 <style scoped>
 .nav-bar-container {
-  background-color: #ff2e63;
+  background-color: #051622;
   height: inherit;
   display: flex;
   flex-direction: row;
@@ -61,13 +61,13 @@ const doSomething = () => {
 
 .left-container-link {
   font-size: 24px;
-  color: rgb(0, 0, 0);
+  color: #1ba098;
   padding: 10px;
   margin: 0px 5px;
 }
 
 .left-container-link:hover {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4); /* Add a subtle box-shadow effect */
+  box-shadow: 0 0 10px #1ba098; /* Add a subtle box-shadow effect */
   cursor: pointer;
 }
 
@@ -78,6 +78,7 @@ const doSomething = () => {
   color: rgb(0, 0, 0);
   margin: auto;
   border: 1px solid rgb(0, 0, 0);
+  color: #1ba098;
 }
 
 .logo {
@@ -92,6 +93,7 @@ const doSomething = () => {
   width: 300px;
   align-items: center; /* Center vertically */
   justify-content: flex-end;
+  color: #1ba098;
 }
 
 .image-container {
@@ -100,6 +102,7 @@ const doSomething = () => {
   align-items: center; /* Center vertically */
   padding: 10px;
   margin: 0px 5px;
+  background-color: #1ba098;
 }
 
 .image-container img {
@@ -110,7 +113,7 @@ const doSomething = () => {
 }
 
 .image-container:hover {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4); /* Add a subtle box-shadow effect */
+  box-shadow: 0 0 10px #1ba098; /* Add a subtle box-shadow effect */
 }
 
 /* Styles for small screens */
@@ -146,6 +149,7 @@ const doSomething = () => {
     height: 50%;
     display: flex;
     align-items: center; /* Center vertically */
+    background-color: #1ba098;
   }
   @media only screen and (max-width: 400px) {
     .center-container {

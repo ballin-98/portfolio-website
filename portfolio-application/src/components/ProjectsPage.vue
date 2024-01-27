@@ -178,8 +178,8 @@ const checkForOverlap = (tags: TagDto[]) => {
 
 <style scoped>
 .projects-page-container {
-  height: 100%;
-  background: rgb(166, 170, 166);
+  height: 90vh;
+  background-color: #deb992;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -187,13 +187,13 @@ const checkForOverlap = (tags: TagDto[]) => {
 }
 
 .project-tag-container {
-  width: calc(100% - 40px);
+  width: calc(100% - 140px);
   height: 100px;
   display: flex;
   justify-content: flex-start; /* Align content to the end (right side) */
   align-items: center;
   flex-wrap: wrap;
-  border: 2px solid red;
+  /* border: 2px solid red; */
 }
 
 .arrow-button {
@@ -227,7 +227,7 @@ const checkForOverlap = (tags: TagDto[]) => {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  border: 2px solid purple;
+  /* border: 2px solid purple; */
   margin: 20px;
   /* gap: 20px; */
 }

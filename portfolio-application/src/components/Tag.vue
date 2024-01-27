@@ -44,8 +44,8 @@ const closeTag = () => {
 
   color: #424141;
   border-radius: 6px;
-  border: 2px solid #9e9e9e;
-  background-color: #c9c9c9;
+  border: 2px solid #1ba098;
+  background-color: #1ba098;
   cursor: pointer;
   transition: 0.1s ease;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
