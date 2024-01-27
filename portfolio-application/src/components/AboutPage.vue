@@ -11,10 +11,7 @@
 </template>
 
 <script setup lang="ts">
-const description = `Dynamic professional, recent graduate in Computer Science from the University of Alberta, 
-  with a passion for optimizing applications and crafting sophisticated solutions Based in Edmonton, Canada, 
-  I am an enthusiastic developer dedicated to bringing futuristic web development and design expertise. 
-  Specializing in next-level websites and web applications  with a strong emphasis on creative problem-solving and user-centric solutions.`;
+const description = `I'm a Computer Science graduate from the University of Alberta with over four years of professional experience in web development. Based in Edmonton, Canada, I specialize in crafting sophisticated solutions and optimizing applications. My expertise lies in futuristic web development and design, focusing on next-level websites and web applications. I bring a proven track record of creative problem-solving and a dedication to user-centric solutions. I look forward to contributing my skills and experience to elevate your projects.`;
 </script>
 
 <style scoped>
@@ -60,7 +57,7 @@ const description = `Dynamic professional, recent graduate in Computer Science f
   display: flex;
   justify-content: center; /* Center the content horizontally */
   align-items: center; /* Center the content vertically */
-  border: 2px solid #1ba098;
+  border: 2px solid #1c978f;
   border-radius: 5px;
   background-color: #deb992; /* Red background color */
   color: #1d8881; /* White text color */
@@ -68,6 +65,6 @@ const description = `Dynamic professional, recent graduate in Computer Science f
   padding: 20px; /* Add padding for better visual appearance */
   margin: 20px;
   font-size: 20px;
-  font-weight: 800;
+  font-weight: 1000;
 }
 </style>

@@ -75,9 +75,8 @@ const doSomething = () => {
   display: flex;
   flex-direction: row;
   flex: 1;
-  color: rgb(0, 0, 0);
   margin: auto;
-  border: 1px solid rgb(0, 0, 0);
+  border: 1px solid #1ba098;
   color: #1ba098;
 }
 
