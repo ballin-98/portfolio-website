@@ -5,9 +5,6 @@
     </div>
     <div class="right-container">
       <div class="header">ABOUT</div>
-      <div class="one-word">
-        {{}}
-      </div>
       <div class="description">{{ description }}</div>
     </div>
   </div>
@@ -18,8 +15,6 @@ const description = `Dynamic professional, recent graduate in Computer Science f
   with a passion for optimizing applications and crafting sophisticated solutions Based in Edmonton, Canada, 
   I am an enthusiastic developer dedicated to bringing futuristic web development and design expertise. 
   Specializing in next-level websites and web applications  with a strong emphasis on creative problem-solving and user-centric solutions.`;
-
-const words = ["Developer", "Problem Solver", "Fitness Enthusiast"];
 </script>
 
 <style scoped>
@@ -43,7 +38,8 @@ const words = ["Developer", "Problem Solver", "Fitness Enthusiast"];
 .right-container {
   display: flex;
   flex: 1; /* Take up the remaining space */
-  background-color: #889eb3; /* Placeholder background color for the right container */
+  /* background-color: #889eb3; Placeholder background color for the right container */
+  background-color: #deb992;
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -64,13 +60,14 @@ const words = ["Developer", "Problem Solver", "Fitness Enthusiast"];
   display: flex;
   justify-content: center; /* Center the content horizontally */
   align-items: center; /* Center the content vertically */
-  border: 2px solid #e74c3c; /* Red border */
+  border: 2px solid #1ba098;
   border-radius: 5px;
-  background-color: #e74c3c; /* Red background color */
-  color: #fff; /* White text color */
+  background-color: #deb992; /* Red background color */
+  color: #1d8881; /* White text color */
   width: calc(100%-40px);
   padding: 20px; /* Add padding for better visual appearance */
   margin: 20px;
   font-size: 20px;
+  font-weight: 800;
 }
 </style>
