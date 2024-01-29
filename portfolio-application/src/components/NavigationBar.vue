@@ -112,7 +112,7 @@ const doSomething = () => {
 }
 
 .image-container:hover {
-  box-shadow: 0 0 10px #1ba098; /* Add a subtle box-shadow effect */
+  box-shadow: 0 0 15px #1ba098; /* Add a subtle box-shadow effect */
 }
 
 /* Styles for small screens */
