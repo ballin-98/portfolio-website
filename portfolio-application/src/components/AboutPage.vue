@@ -19,6 +19,7 @@ const description = `I'm a Computer Science graduate from the University of Albe
   display: flex;
   height: 90vh; /* 100% of the viewport height */
   font-family: "Roboto Mono", monospace;
+  flex-direction: row;
 }
 
 .left-container {
@@ -47,10 +48,10 @@ const description = `I'm a Computer Science graduate from the University of Albe
   align-items: center; /* Center the content vertically */
 
   color: #fff; /* White text color */
-  width: calc(100% - 40px); /* Corrected syntax */
+  width: calc(100% - 30px); /* Corrected syntax */
   font-size: 40px;
   height: 80px; /* Set a fixed height for the header */
-  padding-left: 20px; /* Add left padding */
+  padding-left: 10px;
 }
 
 .description {
@@ -61,10 +62,50 @@ const description = `I'm a Computer Science graduate from the University of Albe
   border-radius: 5px;
   background-color: #deb992; /* Red background color */
   color: #1d8881; /* White text color */
-  width: calc(100%-40px);
-  padding: 20px; /* Add padding for better visual appearance */
-  margin: 20px;
+  width: calc(100% - 60px);
+  padding: 10px; /* Add padding for better visual appearance */
+  margin: 10px;
   font-size: 20px;
   font-weight: 1000;
+}
+
+@media screen and (max-width: 800px) {
+  .container {
+    flex-direction: column;
+  }
+  .left-container {
+    /* height: 45vh; Set a fixed height for the left container on smaller screens */
+    overflow: hidden; /* Ensure child elements don't overflow */
+  }
+
+  .right-container {
+    /* height: 45vh; */
+    justify-content: center;
+  }
+  .header {
+    display: flex;
+    align-items: center; /* Center the content vertically */
+    color: #fff; /* White text color */
+    width: calc(100% - 40px); /* Corrected syntax */
+    font-size: 32px;
+    padding: 5px;
+    /* border: 2px solid white;
+    border-radius: 5px; */
+    height: 50px;
+  }
+
+  .description {
+    display: flex;
+    justify-content: center; /* Center the content horizontally */
+    align-items: center; /* Center the content vertically */
+    border: 2px solid #1c978f;
+    border-radius: 5px;
+    background-color: #deb992; /* Red background color */
+    color: #1d8881; /* White text color */
+    width: calc(100% - 40px);
+    padding: 5px; /* Add padding for better visual appearance */
+    font-size: 14px;
+    font-weight: 1000;
+  }
 }
 </style>

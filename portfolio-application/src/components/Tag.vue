@@ -42,7 +42,7 @@ const closeTag = () => {
   justify-content: space-between;
   white-space: nowrap;
 
-  color: #424141;
+  color: #051622;
   border-radius: 6px;
   border: 2px solid #1ba098;
   background-color: #1ba098;
@@ -52,7 +52,7 @@ const closeTag = () => {
 }
 
 .tag-container:hover {
-  background-color: #a0a0a0;
+  background-color: #208f87;
   transform: scale(1.1);
 }
 
