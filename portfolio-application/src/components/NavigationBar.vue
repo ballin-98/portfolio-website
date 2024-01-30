@@ -1,7 +1,10 @@
 <template>
-  <div class="nav-bar-container">
+  <div
+    class="nav-bar-container"
+    :class="darkMode ? 'dark-theme' : 'light-theme'"
+  >
     <div class="left-container">
-      <a @click="doSomething">
+      <a @click="scrollToTop">
         <div class="left-container-link">ABOUT</div>
       </a>
       <a href="#project-page">
@@ -32,7 +35,8 @@
 </template>
 
 <script setup lang="ts">
-const doSomething = () => {
+import { darkMode, toggleDarkMode } from "@/composables/isDarkMode";
+const scrollToTop = () => {
   window.scrollTo({
     top: 0,
     behavior: "smooth",
@@ -61,7 +65,7 @@ const doSomething = () => {
 
 .left-container-link {
   font-size: 24px;
-  color: #1ba098;
+  color: var(--navigation-text-color);
   padding: 10px;
   margin: 0px 5px;
 }
@@ -76,8 +80,8 @@ const doSomething = () => {
   flex-direction: row;
   flex: 1;
   margin: auto;
-  border: 1px solid #1ba098;
-  color: #1ba098;
+  border: 1px solid var(--navigation-text-color);
+  color: var(--navigation-text-color);
 }
 
 .logo {
@@ -92,7 +96,7 @@ const doSomething = () => {
   width: 300px;
   align-items: center; /* Center vertically */
   justify-content: flex-end;
-  color: #1ba098;
+  color: var(--navigation-text-color);
 }
 
 .image-container {
@@ -101,7 +105,7 @@ const doSomething = () => {
   align-items: center; /* Center vertically */
   padding: 10px;
   margin: 0px 5px;
-  background-color: #1ba098;
+  background-color: var(--navigation-text-color);
 }
 
 .image-container img {
@@ -129,7 +133,7 @@ const doSomething = () => {
 
   .left-container-link {
     font-size: 20px;
-    color: white;
+    color: var(--text-color);
   }
 
   .left-container-link:hover {

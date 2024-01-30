@@ -1,9 +1,25 @@
 <template>
-  <div class="container" id="about-page">
+  <div
+    class="container"
+    :class="darkMode ? 'dark-theme' : 'light-theme'"
+    id="about-page"
+  >
     <div class="left-container">
       <img src="/assets/alex.jpeg" alt="Your Image" />
     </div>
     <div class="right-container">
+      <div class="top-container">
+        <div
+          v-if="!darkMode"
+          class="button-container light-mode"
+          @click="toggleDarkMode"
+        >
+          <img src="/assets/light_mode.svg" alt="" />
+        </div>
+        <div v-else class="button-container dark-mode" @click="toggleDarkMode">
+          <img src="/assets/dark_mode.svg" alt="" />
+        </div>
+      </div>
       <div class="header">ABOUT</div>
       <div class="description">{{ description }}</div>
     </div>
@@ -11,6 +27,7 @@
 </template>
 
 <script setup lang="ts">
+import { darkMode, toggleDarkMode } from "@/composables/isDarkMode";
 const description = `I'm a Computer Science graduate from the University of Alberta with over four years of professional experience in web development. Based in Edmonton, Canada, I specialize in crafting sophisticated solutions and optimizing applications. My expertise lies in futuristic web development and design, focusing on next-level websites and web applications. I bring a proven track record of creative problem-solving and a dedication to user-centric solutions. I look forward to contributing my skills and experience to elevate your projects.`;
 </script>
 
@@ -37,17 +54,53 @@ const description = `I'm a Computer Science graduate from the University of Albe
   display: flex;
   flex: 1; /* Take up the remaining space */
   /* background-color: #889eb3; Placeholder background color for the right container */
-  background-color: #deb992;
-  justify-content: center;
+  background-color: var(--background-color);
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
+}
+
+.top-container {
+  /* border: 2px solid white; */
+  display: flex;
+  height: 25vh;
+  width: 100%;
+  display: flex;
+  color: var(--background-color);
+  cursor: pointer;
+  justify-content: flex-end;
+}
+
+.button-container {
+  height: 50px;
+  width: 70px;
+  margin: 10px;
+  /* border: 2px solid white; */
+  display: flex;
+  /* justify-content: flex-start; */
+  align-items: center;
+  background-color: var(--dark-mode-container);
+  border-radius: 10%;
+}
+
+.light-mode {
+  justify-content: flex-end;
+}
+
+.dark-mode {
+  justify-content: flex-start;
+}
+
+.button-container img {
+  height: 35px;
+  width: 35px;
 }
 
 .header {
   display: flex;
   align-items: center; /* Center the content vertically */
 
-  color: #fff; /* White text color */
+  color: var(--text-color); /* White text color */
   width: calc(100% - 30px); /* Corrected syntax */
   font-size: 40px;
   height: 80px; /* Set a fixed height for the header */
@@ -60,7 +113,7 @@ const description = `I'm a Computer Science graduate from the University of Albe
   align-items: center; /* Center the content vertically */
   border: 2px solid #1c978f;
   border-radius: 5px;
-  background-color: #deb992; /* Red background color */
+  background-color: var(--background-color); /* Red background color */
   color: #1d8881; /* White text color */
   width: calc(100% - 60px);
   padding: 10px; /* Add padding for better visual appearance */
@@ -82,10 +135,19 @@ const description = `I'm a Computer Science graduate from the University of Albe
     /* height: 45vh; */
     justify-content: center;
   }
+  .top-container {
+    height: 60px;
+  }
+
+  .button-container {
+    height: 50px;
+    width: 70px;
+    margin: 5px 10px;
+  }
   .header {
     display: flex;
     align-items: center; /* Center the content vertically */
-    color: #fff; /* White text color */
+    color: var(--text-color); /* White text color */
     width: calc(100% - 40px); /* Corrected syntax */
     font-size: 32px;
     padding: 5px;
@@ -100,7 +162,7 @@ const description = `I'm a Computer Science graduate from the University of Albe
     align-items: center; /* Center the content vertically */
     border: 2px solid #1c978f;
     border-radius: 5px;
-    background-color: #deb992; /* Red background color */
+    background-color: var(--background-color); /* Red background color */
     color: #1d8881; /* White text color */
     width: calc(100% - 40px);
     padding: 5px; /* Add padding for better visual appearance */
