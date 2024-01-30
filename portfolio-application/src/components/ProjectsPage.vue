@@ -1,5 +1,9 @@
 <template>
-  <div class="projects-page-container" id="project-page">
+  <div
+    class="projects-page-container"
+    :class="darkMode ? 'dark-theme' : 'light-theme'"
+    id="project-page"
+  >
     <div class="project-tag-container">
       <Tag
         v-for="tag in computedTagsToDisplay"
@@ -47,6 +51,7 @@ import Tag from "@/components/Tag.vue";
 import { TagDto } from "@/projectData";
 import { allTags } from "@/data/tagData";
 import { CircularArray } from "@/helpers/dataStructures";
+import { darkMode } from "@/composables/isDarkMode";
 
 // refs
 const tagsToDisplay: Ref<TagDto[]> = ref(allTags);
@@ -179,7 +184,7 @@ const checkForOverlap = (tags: TagDto[]) => {
 <style scoped>
 .projects-page-container {
   height: 90vh;
-  background-color: #deb992;
+  background-color: var(--background-color);
   display: flex;
   justify-content: center;
   align-items: center;

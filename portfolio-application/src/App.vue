@@ -6,6 +6,7 @@
 
 <script setup lang="ts">
 import ContainerPage from "@/components/ContainerPage.vue";
+import "./global.css";
 </script>
 
 <style>
