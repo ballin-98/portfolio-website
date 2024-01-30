@@ -245,4 +245,23 @@ const checkForOverlap = (tags: TagDto[]) => {
   pointer-events: none;
   opacity: 0.2;
 }
+
+@media only screen and (max-width: 800px) {
+  .project-tag-container {
+    display: none;
+  }
+
+  .projects-container {
+    height: 80vh;
+    width: (100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .arrow-button {
+    transform: rotate(90deg);
+  }
+}
 </style>
