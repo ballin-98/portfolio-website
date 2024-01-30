@@ -80,4 +80,16 @@ const props = defineProps({
   width: 100%;
   height: 100%;
 }
+
+@media only screen and (max-width: 800px) {
+  .card-container {
+    height: 90%;
+    width: 90%;
+    position: relative;
+    border-radius: 2px;
+    overflow: hidden; /* Ensure the overlay doesn't spill out */
+    transition: transform 0.1s;
+    padding: 10px 0px;
+  }
+}
 </style>
