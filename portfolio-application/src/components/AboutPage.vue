@@ -67,7 +67,6 @@ const description = `I'm a Computer Science graduate from the University of Albe
   width: 100%;
   display: flex;
   color: var(--background-color);
-  cursor: pointer;
   justify-content: flex-end;
 }
 
@@ -81,6 +80,7 @@ const description = `I'm a Computer Science graduate from the University of Albe
   align-items: center;
   background-color: var(--dark-mode-container);
   border-radius: 10%;
+  cursor: pointer;
 }
 
 .light-mode {

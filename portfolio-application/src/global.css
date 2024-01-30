@@ -3,6 +3,7 @@
   --text-color: #8f8d8d; /* Dark theme text color */
   --dark-mode-container: #8f8d8d;
   --navigation-text-color: #8f8d8d;
+  --border-color: #380d34;
 }
 
 .light-theme {
@@ -10,4 +11,5 @@
   --text-color: #ffffff; /* Dark theme text color */
   --dark-mode-container: #deb992;
   --navigation-text-color: #1ba098;
+  --border-color: #380d34;
 }
