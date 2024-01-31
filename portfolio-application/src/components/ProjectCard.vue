@@ -37,6 +37,7 @@ const props = defineProps({
   overflow: hidden; /* Ensure the overlay doesn't spill out */
   transition: transform 0.1s;
   padding: 0px 30px;
+  font-family: "Roboto Mono", monospace;
 }
 
 .card-container:hover {
@@ -78,6 +79,7 @@ const props = defineProps({
   height: 100%;
   margin: 20px 0px;
   font-size: 24px;
+  font-family: "Roboto Mono", monospace;
 }
 .card-description {
   width: 100%;
