@@ -17,7 +17,7 @@ export const projectList: projectCardData[] = [
     title: "LawDepot eSign",
     description:
       "An electronic signature web application built using Vue3 and .NET 6",
-    image: "/assets/p2.jpg",
+    image: "/assets/eSign.png",
     tags: [
       { title: "Vue 3", showTag: true },
       { title: ".Net 6", showTag: true },
@@ -38,7 +38,7 @@ export const projectList: projectCardData[] = [
     title: "LawDepot Advanced Editor",
     description:
       "A document editing application that allows users to edit and share their legal documents. Also allows users to import / export word documents and pdfs",
-    image: "/assets/p3.jpg",
+    image: "/assets/ae.png",
     tags: [
       { title: "Vue 3", showTag: true },
       { title: ".Net 6", showTag: true },
@@ -59,7 +59,7 @@ export const projectList: projectCardData[] = [
     title: "Stress Testing Application",
     description:
       "Built using Python and the Locust framework this application stress tests endpoints and provides insights to any vulnerabilities",
-    image: "/assets/p4.jpg",
+    image: "/assets/stress_testing.jpg",
     tags: [
       { title: "Python", showTag: true },
       { title: "Locust", showTag: true },
@@ -71,7 +71,7 @@ export const projectList: projectCardData[] = [
     title: "Dividend Calculator",
     description:
       "A web application built using Vue3 dedicated to figuring out returns on money invested for dividend focused investors",
-    image: "/assets/p5.jpg",
+    image: "/assets/dividend_calculator.jpg",
     tags: [
       { title: ".Net 6", showTag: true },
       { title: "JavaSript", showTag: true },
@@ -83,7 +83,7 @@ export const projectList: projectCardData[] = [
     title: "Citrus Network",
     description:
       "A social media website dedicated built using Django and React, dedicated to keeping information private while letting you connect with friends",
-    image: "/assets/p2.jpg",
+    image: "/assets/CitrusNetwork.jpg",
     tags: [
       { title: "React", showTag: true },
       { title: "TypeScript", showTag: true },
@@ -97,7 +97,7 @@ export const projectList: projectCardData[] = [
     title: "ETL - City of Edmonton",
     description:
       "An automated workflow built using FME that extracts, transforms and aggregates data from over 10 different sources",
-    image: "/assets/p3.jpg",
+    image: "/assets/etl.jpg",
     tags: [
       { title: "FME", showTag: true },
       { title: "Python", showTag: true },
