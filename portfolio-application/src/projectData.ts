@@ -12,56 +12,98 @@ export type TagDto = {
   showTag: boolean;
 };
 
-import { allTags } from "./data/tagData";
-
 export const projectList: projectCardData[] = [
   {
-    title: "project 1",
-    description: "description 1",
-    image: "/assets/p2.jpg",
-    tags: [{ title: "C#", showTag: true }],
+    title: "LawDepot eSign",
+    description:
+      "An electronic signature web application built using Vue3 and .NET 6",
+    image: "/assets/eSign.png",
+    tags: [
+      { title: "Vue 3", showTag: true },
+      { title: ".Net 6", showTag: true },
+      { title: "Web Development", showTag: true },
+      { title: "Backend Development", showTag: true },
+      { title: "API Development", showTag: true },
+      { title: "Mobile Development", showTag: true },
+      { title: "JavaSript", showTag: true },
+      { title: "TypeScript", showTag: true },
+      { title: "C#", showTag: true },
+      { title: "Responsive Web Design", showTag: true },
+      { title: "API Development", showTag: true },
+      { title: "Mobile Development", showTag: true },
+    ],
     index: 0,
   },
   {
-    title: "project 2",
-    description: "description 2",
-    image: "/assets/p3.jpg",
-    tags: [{ title: "Vue", showTag: true }],
+    title: "LawDepot Advanced Editor",
+    description:
+      "A document editing application that allows users to edit and share their legal documents. Also allows users to import / export word documents and pdfs",
+    image: "/assets/ae.png",
+    tags: [
+      { title: "Vue 3", showTag: true },
+      { title: ".Net 6", showTag: true },
+      { title: "Web Development", showTag: true },
+      { title: "Backend Development", showTag: true },
+      { title: "API Development", showTag: true },
+      { title: "Mobile Development", showTag: true },
+      { title: "JavaSript", showTag: true },
+      { title: "TypeScript", showTag: true },
+      { title: "C#", showTag: true },
+      { title: "Responsive Web Design", showTag: true },
+      { title: "API Development", showTag: true },
+      { title: "Mobile Development", showTag: true },
+    ],
     index: 1,
   },
   {
-    title: "project 3",
-    description: "description 3",
-    image: "/assets/p4.jpg",
-    tags: [{ title: "React", showTag: true }],
+    title: "Stress Testing Application",
+    description:
+      "Built using Python and the Locust framework this application stress tests endpoints and provides insights to any vulnerabilities",
+    image: "/assets/stress_testing.jpg",
+    tags: [
+      { title: "Python", showTag: true },
+      { title: "Locust", showTag: true },
+      { title: "Stress Testing", showTag: true },
+    ],
     index: 2,
   },
   {
-    title: "project 4",
-    description: "description 4",
-    image: "/assets/p5.jpg",
-    tags: allTags.slice(4, 5),
+    title: "Dividend Calculator",
+    description:
+      "A web application built using Vue3 dedicated to figuring out returns on money invested for dividend focused investors",
+    image: "/assets/dividend_calculator.jpg",
+    tags: [
+      { title: ".Net 6", showTag: true },
+      { title: "JavaSript", showTag: true },
+      { title: "TypeScript", showTag: true },
+    ],
     index: 3,
   },
   {
-    title: "project 5",
-    description: "description 5",
-    image: "/assets/p2.jpg",
-    tags: allTags.slice(12, 14),
+    title: "Citrus Network",
+    description:
+      "A social media website dedicated built using Django and React, dedicated to keeping information private while letting you connect with friends",
+    image: "/assets/CitrusNetwork.jpg",
+    tags: [
+      { title: "React", showTag: true },
+      { title: "TypeScript", showTag: true },
+      { title: "Python", showTag: true },
+      { title: "Django", showTag: true },
+      { title: "Design", showTag: true },
+    ],
     index: 4,
   },
   {
-    title: "project 6",
-    description: "description 6",
-    image: "/assets/p3.jpg",
-    tags: allTags.slice(2, 3),
+    title: "ETL - City of Edmonton",
+    description:
+      "An automated workflow built using FME that extracts, transforms and aggregates data from over 10 different sources",
+    image: "/assets/etl.jpg",
+    tags: [
+      { title: "FME", showTag: true },
+      { title: "Python", showTag: true },
+      { title: "SQL", showTag: true },
+      { title: "Tableau", showTag: true },
+    ],
     index: 5,
-  },
-  {
-    title: "project 7",
-    description: "description 7",
-    image: "/assets/p4.jpg",
-    tags: allTags.slice(5, 9),
-    index: 6,
   },
 ];

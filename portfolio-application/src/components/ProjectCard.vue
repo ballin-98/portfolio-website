@@ -37,6 +37,7 @@ const props = defineProps({
   overflow: hidden; /* Ensure the overlay doesn't spill out */
   transition: transform 0.1s;
   padding: 0px 30px;
+  font-family: "Roboto Mono", monospace;
 }
 
 .card-container:hover {
@@ -73,12 +74,17 @@ const props = defineProps({
   opacity: 1;
   background-color: rgb(129, 124, 124, 0.8);
 }
-.card-title,
-.card-description {
-  margin: 0;
-  /* border: 1px solid black; */
+.card-title {
   width: 100%;
   height: 100%;
+  margin: 20px 0px;
+  font-size: 24px;
+  font-family: "Roboto Mono", monospace;
+}
+.card-description {
+  width: 100%;
+  height: 100%;
+  margin: 20px 0px;
 }
 
 @media only screen and (max-width: 800px) {
@@ -86,10 +92,24 @@ const props = defineProps({
     height: 90%;
     width: 90%;
     position: relative;
-    border-radius: 2px;
+    border-radius: 20%;
     overflow: hidden; /* Ensure the overlay doesn't spill out */
     transition: transform 0.1s;
     padding: 10px 0px;
+  }
+
+  .card-title {
+    width: 100%;
+    height: 100%;
+    margin: 10px 0px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  .card-description {
+    width: 100%;
+    height: 100%;
+    margin: 10px 0px;
+    font-size: 14px;
   }
 }
 </style>
